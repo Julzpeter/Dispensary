@@ -10,3 +10,5 @@ class Admin(models.Model):
     phone_number = PhoneNumberField(max_length=10, null=False,blank=False,unique=True)
 
     
+
+    
