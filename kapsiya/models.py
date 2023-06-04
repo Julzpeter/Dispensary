@@ -4,18 +4,13 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
-class Admin(models.Model):
-    firstname = models.CharField(max_length=50)
-    lastname = models.CharField(max_length=50)
-    username = models.CharField(max_length=50)
-    password = models.CharField(max_length=50)
-    phone_number = PhoneNumberField(max_length=10, null=False,blank=False,unique=True)
+
 
 class Doctor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_pic = models.ImageField(upload_to='profile_pic/DoctorProfilePic/',null=True,blank=True)
     address = models.CharField(max_length=40)
-    phone_number = PhoneNumberField(max_length=10, null=False,blank=False,unique=True)
+    phone_number = PhoneNumberField(max_length=13, null=False,blank=False,unique=True)
 
     @property
     def get_name(self):
