@@ -6,5 +6,5 @@ urlpatterns = [
     path('about/', views.about, name="kapsiya-about"),
     path('adminclick/', views.adminclick_view, name="kapsiya-admin"),
 
-    path('afterlogin', views.afterlogin, name='afterlogin'),
+    path('afterlogin', views.afterlogin_view, name='afterlogin'),
 ]
