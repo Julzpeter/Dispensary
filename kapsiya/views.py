@@ -10,6 +10,7 @@ def home(request):
 def about(request):
     return HttpResponse('<h1>About us</h1>')
 
+#views for showing signup/login button for admin (by submit)
 def adminclick_view(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect('afterlogin')
