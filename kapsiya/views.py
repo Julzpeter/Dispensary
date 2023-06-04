@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render,redirect
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import Admin
 
 # Create your views here.
@@ -11,6 +11,9 @@ def about(request):
     return HttpResponse('<h1>About us</h1>')
 
 def adminclick_view(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('afterlogin')
+    return render(request, 'adminclick.html')
         
   
-        return HttpResponse('<h1>Hello Admin</h1>')
+        
