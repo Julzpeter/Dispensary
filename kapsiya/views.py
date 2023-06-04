@@ -28,8 +28,8 @@ def admin_signup_view(request):
             user.save()
             my_admin_group = Group.objects.get_or_create(name='ADMIN')
             my_admin_group[0].user_set.add(user)
-            return HttpResponseRedirect('adminlogin')
-        return render(request, 'adminsignup.html', {'form':form})
+        return HttpResponseRedirect('adminlogin')
+    return render(request, 'adminsignup.html', {'form':form})
 
 #-----------for checking user is doctor , patient or admin(by sumit)
 def is_admin(user):
