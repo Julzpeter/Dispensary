@@ -5,7 +5,7 @@ from .models import Admin
 # Create your views here.
 
 def home(request):
-    return HttpResponse('<h1>Welcome to Kapsiya Dispensary Management System</h1>')
+    return render(request, 'index.html')
 
 def about(request):
     return HttpResponse('<h1>About us</h1>')
