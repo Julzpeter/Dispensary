@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from . import forms,models
 from django.contrib.auth.models import Group
+from django.contrib import messages
 
 from . import models
 # Create your views here.
@@ -23,6 +24,9 @@ def admin_signup_view(request):
     if request.method == 'POST':
         form=forms.AdminSignUpForm(request.POST)
         if form.is_valid():
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Account created for {username}!')
+            return redirect('adminlogin')
             user = form.save()
             user.set_password(user.password)
             user.save()
