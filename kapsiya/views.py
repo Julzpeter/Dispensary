@@ -1,5 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse, HttpResponseRedirect
+from . import forms,models
+from django.contrib.auth.models import Group
 
 from . import models
 # Create your views here.
@@ -15,6 +17,19 @@ def adminclick_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
     return render(request, 'adminclick.html')
+
+def admin_signup_view(request):
+    form = forms.AdminSignupForm()
+    if request.method == 'POST':
+        form=forms.AdminSignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.set_password(user.password)
+            user.save()
+            my_admin_group = Group.objects.get_or_create(name='ADMIN')
+            my_admin_group[0].user_set.add(user)
+            return HttpResponseRedirect('adminlogin')
+        return render(request, 'adminsignup.html', {'form':form})
 
 #-----------for checking user is doctor , patient or admin(by sumit)
 def is_admin(user):
