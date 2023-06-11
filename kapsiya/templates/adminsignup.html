@@ -2,33 +2,28 @@
 {% extends 'base.html' %}
 {% block title %} Create and Account {% endblock %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    {% block content %}
-    <br>
-    <br>
-    <br>
-    <br>
-    <form method="post" class="form-group">
-        <div class="container register-form">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        {% block content %}
+        <br>
+        <br>
+        <br>
+        <br>
+        <form method="post" class="form-group">
             {% csrf_token %}
-            {{form.as_p}}
-            <button type="submit" class="btn btn-success">Register </button>
-
-        </div>
-        <div class="border-top pt-3">
-            <small class="text-muted">Already have an Account? <a  class="ml-2" href="adminlogin">Sign In</a>
-    
-        </div>
-        
-    </form>
- 
-    {% endblock %} 
-</body>
+            <div class="center-form">
+                {{form.as_p}}
+                <button type="submit" class="btn btn-success">Register</button>
+                <small class="text-muted">Already have an Account?
+                    <a class="ml-2" href="adminlogin">Sign In</a>
+                </small>
+            </div>
+        </form>
+        {% endblock %}
+    </body>
 </html>
