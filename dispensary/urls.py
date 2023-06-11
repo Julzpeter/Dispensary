@@ -21,9 +21,10 @@ from django.contrib.auth.views import LoginView
 
 
 urlpatterns = [
+    path("",include('kapsiya.urls')),
     path('admin/', admin.site.urls),
-    #path('adminsignup/', views.admin_signup_view),
+   
      #path('adminlogin/', LoginView.as_view(template_name="adminlogin.html")),
-    path('',include('kapsiya.urls')),
+   
 
 ]

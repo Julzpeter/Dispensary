@@ -39,7 +39,7 @@ def admin_signup_view(request):
 
 def admin_login(request):
     if request.method == "POST":
-        form = forms.AuthenticationForm(request, data=request.POST)
+        form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')

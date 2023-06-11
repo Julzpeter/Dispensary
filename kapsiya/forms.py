@@ -15,3 +15,12 @@ class AdminSignupForm(forms.ModelForm):
         widgets = {
         'password': forms.PasswordInput()
         }
+        
+class AuthenticationForm(forms.ModelForm):
+    class Meta:
+        model=User
+        fields=['username', 'password']
+        widgets = {
+            'password': forms.PasswordInput()
+
+        }
