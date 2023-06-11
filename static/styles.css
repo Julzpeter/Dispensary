@@ -5,3 +5,12 @@ body,p,h1{
     font-family: 'Roboto', sans-serif;
 
 }
+.center-form{
+    padding-right: 30%;
+    border:1px solid #d9e0e8;
+    margin-bottom:2%;
+    justify-content: center;
+    margin: 40px 50px;
+    padding: 30px;
+    
+}
