@@ -5,7 +5,8 @@ from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import AuthenticationForm #add this
+from django.contrib.auth.forms import AuthenticationForm 
+from django.contrib.auth.decorators import login_required,user_passes_test
 
 
 from . import models
@@ -22,6 +23,12 @@ def adminclick_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
     return render(request, 'adminclick.html')
+
+#doctor's signup and login button
+def doctorclick_view(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('afterlogin')
+    return render (request, 'doctorclick.html')
 
 def admin_signup_view(request):
     if request.method == 'POST':
@@ -75,6 +82,35 @@ def afterlogin_view(request):
             return redirect('doctor-dashboard')
         else:
             return render(request,'hospital/doctor_wait_for_approval.html')
+        
+
+#admin dashboard
+@login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
+def admin_dashboard_view(request):
+    #for both table in admin dashboard
+    doctors=models.Doctor.objects.all().order_by('-id')
+    patients=models.Patient.objects.all().order_by('-id')
+    #for three cards
+    doctorcount=models.Doctor.objects.all().filter(status=True).count()
+    pendingdoctorcount=models.Doctor.objects.all().filter(status=False).count()
+
+    patientcount=models.Patient.objects.all().filter(status=True).count()
+    pendingpatientcount=models.Patient.objects.all().filter(status=False).count()
+
+    appointmentcount=models.Appointment.objects.all().filter(status=True).count()
+    pendingappointmentcount=models.Appointment.objects.all().filter(status=False).count()
+    mydict={
+    'doctors':doctors,
+    'patients':patients,
+    'doctorcount':doctorcount,
+    'pendingdoctorcount':pendingdoctorcount,
+    'patientcount':patientcount,
+    'pendingpatientcount':pendingpatientcount,
+    'appointmentcount':appointmentcount,
+    'pendingappointmentcount':pendingappointmentcount,
+    }
+    return render(request,'hospital/admin_dashboard.html',context=mydict)
     
 
         
