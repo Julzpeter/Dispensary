@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'kapsiya',
     'phonenumber_field',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
