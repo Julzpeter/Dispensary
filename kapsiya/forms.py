@@ -6,7 +6,11 @@ from . import models
 class AdminSignupForm(forms.ModelForm):
     class Meta:
         model=User
-       
+        """
+         help_texts = {
+            'username': None,
+        }
+        """
         fields=['first_name','last_name','username','password']
         widgets = {
         'password': forms.PasswordInput()
