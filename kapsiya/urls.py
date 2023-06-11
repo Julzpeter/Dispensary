@@ -9,11 +9,9 @@ urlpatterns = [
 
     path('adminsignup/', views.admin_signup_view, name='adminsignup'),
     path('adminlogin/', views.admin_login, name='adminlogin'),
-    
 
-   
-
-    
+    path('doctorsignup', views.doctor_signup_view, name="doctorsignup"),
+     
 
     path('afterlogin', views.afterlogin_view, name='afterlogin'),
 ]
