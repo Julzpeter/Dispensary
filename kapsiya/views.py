@@ -3,6 +3,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from . import forms,models
 from django.contrib.auth.models import Group
 from django.contrib import messages
+from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import AuthenticationForm #add this
+
 
 from . import models
 # Create your views here.
@@ -24,14 +28,36 @@ def admin_signup_view(request):
         form=forms.AdminSignupForm(request.POST)
         if form.is_valid():
             user=form.save()
-            user.set_password(user.password)
-            user.save()
-            my_admin_group = Group.objects.get_or_create(name='ADMIN')
-            my_admin_group[0].user_set.add(user)
-            return HttpResponseRedirect('adminlogin')
+            login(request, user)
+            messages.success(request,"egistration Successful.")
+            return redirect("adminlogin")
+        messages.error(request, "Unsuccessful registration. Invalid Information.")
+        return HttpResponseRedirect('adminlogin')
     else:
         form = forms.AdminSignupForm()      
     return render(request, 'adminsignup.html', {'form':form})
+
+def admin_login(request):
+    if request.method == "POST":
+        form = forms.AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.info(request,f"You are now logged in as{username}.")
+                return redirect("admin-dashboard")
+            else:
+                messages.error(request, "Invalid username or password.")
+        else:
+            messages.error(request,"Invalid username or password.")
+
+    form = AuthenticationForm()
+    return render(request, 'adminlogin.html', context={"login_form":form})
+                    
+                
+		    
 
 #-----------for checking user is doctor , patient or admin(by sumit)
 def is_admin(user):

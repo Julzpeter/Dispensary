@@ -12,5 +12,9 @@ body,p,h1{
     justify-content: center;
     margin: 40px 50px;
     padding: 30px;
+    color: white;
     
+}
+.text-muted{
+    color: red !important;
 }

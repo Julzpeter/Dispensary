@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% extends 'base.html' %}
 
 <html lang="en" dir="ltr">
 
@@ -55,46 +56,23 @@
   <br>
   <br><br>
 
+  {% block content %} 
+
   <!--- login page for admin by admin(sumit)  ---------->
-  <form method="post">
-    {% csrf_token %}
-    <div class="container register-form">
-      <div class="form">
-        <div class="note">  <!--
-            developed By : sumit kumar
-            facebook : fb.com/sumit.luv
-            youtube : youtube.com/lazycoders
-            -->
-          
-            {% include "hospital/footer.html" %}
-          <p>Admin Login Page</p>
-        </div>
+  <div class="container py-5">
+    <h1>Login</h1>
+    <form method="POST">
+      {% csrf_token %}
+      {{ login_form }}
+      <button class="btn btn-primary" type="submit">Login</button>
+    </form>
+    <p class="text-center">Don't have an account? <a href="/register">Create an account</a>.</p>
+  </div>
 
-        <div class="form-content">
-          <div class="row">
-            <div class="col-md-6">
+  {% endblock %}
+       
 
-              <div class="form-group">
-                {% render_field form.username class="form-control" placeholder="Username" %}
-              </div>
-
-            </div>
-            <div class="col-md-6">
-
-              <div class="form-group">
-                {% render_field form.password class="form-control" placeholder="Password" %}
-              </div>
-
-            </div>
-          </div>
-          <button type="submit" class="btnSubmit">Login</button>
-          <div class="text-center">Do not have account? <a href="adminsignup">Signup here</a></div>
-        </div>
-      </div>
-    </div>
-
-  </form>
-
+ 
   <br><br><br>
 
 </body>

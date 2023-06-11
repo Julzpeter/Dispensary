@@ -16,12 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from kapsiya import views
+from django.contrib.auth.views import LoginView
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('adminsignup/', views.admin_signup_view),
-    
+    #path('adminsignup/', views.admin_signup_view),
+     #path('adminlogin/', LoginView.as_view(template_name="adminlogin.html")),
     path('',include('kapsiya.urls')),
 
 ]
