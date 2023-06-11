@@ -30,6 +30,7 @@ def doctorclick_view(request):
         return HttpResponseRedirect('afterlogin')
     return render (request, 'doctorclick.html')
 
+#admin's registration form view function
 def admin_signup_view(request):
     if request.method == 'POST':
         form=forms.AdminSignupForm(request.POST)
@@ -43,6 +44,27 @@ def admin_signup_view(request):
     else:
         form = forms.AdminSignupForm()      
     return render(request, 'adminsignup.html', {'form':form})
+
+#doctor's signup form view function
+def doctor_signup_view(request):
+    userForm=forms.DoctorUserForm()
+    doctorForm=forms.DoctorForm()
+    mydict={'userForm':userForm,'doctorForm':doctorForm}
+    if request.method=='POST':
+        userForm=forms.DoctorUserForm(request.POST)
+        doctorForm=forms.DoctorForm(request.POST,request.FILES)
+        if userForm.is_valid() and doctorForm.is_valid():
+            user=userForm.save()
+            user.set_password(user.password)
+            user.save()
+            doctor=doctorForm.save(commit=False)
+            doctor.user=user
+            doctor=doctor.save()
+            my_doctor_group = Group.objects.get_or_create(name='DOCTOR')
+            my_doctor_group[0].user_set.add(user)
+        return HttpResponseRedirect('doctorlogin')
+    return render(request,'hospital/doctorsignup.html',context=mydict)
+
 
 def admin_login(request):
     if request.method == "POST":
