@@ -23,8 +23,11 @@ def admin_signup_view(request):
     if request.method == 'POST':
         form=forms.AdminSignupForm(request.POST)
         if form.is_valid():
-            username = form.cleaned_data.get('username')
-            messages.success(request, f'Account created for {username}!')
+            user=form.save()
+            user.set_password(user.password)
+            user.save()
+            my_admin_group = Group.objects.get_or_create(name='ADMIN')
+            my_admin_group[0].user_set.add(user)
             return HttpResponseRedirect('adminlogin')
     else:
         form = forms.AdminSignupForm()      
