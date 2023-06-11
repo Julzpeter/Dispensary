@@ -15,11 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from kapsiya import views 
+from kapsiya import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('adminsignup/', views.admin_signup_view ),
+    path('adminsignup/', views.admin_signup_view),
     path('',include('kapsiya.urls')),
 
 ]
