@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% extends 'base.html' %}
+{% block title %} Create and Account {% endblock %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,6 +9,16 @@
     <title>Document</title>
 </head>
 <body>
-    
+    {% block content %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <form method="post" class="form-group">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-success">Register </button>
+    </form>
+    {% endblock %} 
 </body>
 </html>
