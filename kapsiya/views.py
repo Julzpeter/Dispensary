@@ -37,7 +37,7 @@ def admin_signup_view(request):
         if form.is_valid():
             user=form.save()
             login(request, user)
-            messages.success(request,"egistration Successful.")
+            messages.success(request,"Registration Successful.")
             return redirect("adminlogin")
         messages.error(request, "Unsuccessful registration. Invalid Information.")
         return HttpResponseRedirect('adminlogin')

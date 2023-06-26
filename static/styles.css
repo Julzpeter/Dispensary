@@ -18,3 +18,15 @@ body,p,h1{
 .text-muted{
     color: red !important;
 }
+.note {
+    text-align: center;
+    height: 80px;
+    background-color: #7f5a83;
+    font-weight: bold;
+    line-height: 80px;
+   
+  }
+  .form-control {
+    border-radius: 1.5rem;
+  }
+
